@@ -3,7 +3,7 @@ name: EjercicioSeguridad_p3V3
 on: 
   push:
     branches:
-      - main #cambia esto a la rama que quieras que escuche para desplegar 
+      - main 
 
 jobs:
   deploy:
@@ -33,7 +33,7 @@ jobs:
           terraform init
           terraform apply -auto-approve
           INSTANCE_IP=$(terraform output -raw ip_publica 2>&1 | grep -oP '\d+\.\d+\.\d+\.\d+')
-          echo "INSTANCE_IP=$INSTANCE_IP"
+          echo "INSTANCE_IP=$INSTANCE_IP" >> $GITHUB_ENV
 
 
       - name: Debug INSTANCE_IP
