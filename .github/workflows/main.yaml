@@ -33,7 +33,7 @@ jobs:
           terraform init
           terraform apply -auto-approve
           INSTANCE_IP=$(terraform output -raw ip_publica 2>&1 | grep -oP '\d+\.\d+\.\d+\.\d+')
-          
+          echo "INSTANCE_IP=$INSTANCE_IP"
 
 
       - name: Debug INSTANCE_IP
