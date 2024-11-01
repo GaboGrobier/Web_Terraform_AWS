@@ -22,9 +22,15 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.9.8
-      - name: destroy old building 
+
+      - name: Destroy old infrastructure
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
         run: |
           cd infraestructura_tf
+          terraform init
           terraform destroy -auto-approve
 
       - name: build a ec2 with terraform 
