@@ -32,7 +32,7 @@ jobs:
           cd infraestructura_tf
           terraform init
           terraform apply -auto-approve
-          echo "::set-output name=instance_ip::$(terraform output -raw ip_publica)"
+          echo "INSTANCE_IP=$(terraform output -raw ip_publica)" >> $GITHUB_ENV  
 
       - name: Add SSH Key
         run: |
@@ -41,14 +41,10 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
 
       - name: Copy files to server
-        env:
-          INSTANCE_IP: ${{ steps.terraform.outputs.instance_ip }}
         run: |
           rsync -avz --delete -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ./ ${{ secrets.USER_SERVER }}@$INSTANCE_IP:/home/ubuntu/donjose/
 
       - name: SSH commands to deploy
-        env:
-          INSTANCE_IP: ${{ steps.terraform.outputs.instance_ip }}
         run: |
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{secrets.USER_SERVER}}@$INSTANCE_IP << 'EOF'
           cd /home/ubuntu/donjose/
