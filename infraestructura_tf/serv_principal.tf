@@ -22,8 +22,6 @@ resource "aws_instance" "servidor_principal" {
                     python -m venv /home/ubuntu/donjose
 
                     EOF
-
-    
 }
 
 
