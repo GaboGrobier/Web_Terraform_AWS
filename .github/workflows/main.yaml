@@ -32,13 +32,14 @@ jobs:
           cd infraestructura_tf
           terraform init
           terraform apply -auto-approve
-          echo "INSTANCE_IP=$(terraform output -raw ip_publica)" >> $GITHUB_ENV
+          INSTANCE_IP=$(terraform output -raw ip_publica)
+          echo "INSTANCE_IP=$INSTANCE_IP" >> $GITHUB_ENV
 
 
       - name: Debug INSTANCE_IP
         run: |
           echo "INSTANCE_IP=${{ env.INSTANCE_IP }}"
-          
+
       - name: Add SSH Key
         run: |
           mkdir -p ~/.ssh
