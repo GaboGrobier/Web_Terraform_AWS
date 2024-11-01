@@ -25,7 +25,7 @@ jobs:
       - name: destroy old building 
         run: |
           cd infraestructura_tf
-          terraform destroy -auto--auto-approve
+          terraform destroy -auto-approve
 
       - name: build a ec2 with terraform 
         env:
