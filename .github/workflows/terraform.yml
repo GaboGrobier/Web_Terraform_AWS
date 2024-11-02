@@ -27,9 +27,10 @@ jobs:
           cd infraestructura_tf
           terraform init
           terraform apply -auto-approve
-          INSTANCE_IP=$(terraform output  ip_publica )
-          echo "ese es la ip --> : ${INSTANCE_IP}" 
 
-
-      - name: Mostrar todos los outputs
-        run: terraform output
+      - name: obtener ip maquina 
+        id: get_ip
+        run: |
+            PUBLIC_IP=$(terraform output -raw ip_publica )
+            echo "ese es la ip --> : ${INSTANCE_IP}" 
+            echo "PUBLIC_IP=${public_ip}" >> $GITHUB_ENV
