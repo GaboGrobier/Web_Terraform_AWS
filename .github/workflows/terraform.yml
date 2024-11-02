@@ -29,4 +29,7 @@ jobs:
           terraform apply -auto-approve
           INSTANCE_IP=$(terraform output  ip_publica )
           echo "ese es la ip --> : ${INSTANCE_IP}" 
-          echo "INSTANCE_IP=$INSTANCE_IP" >> $GITHUB_ENV
+
+
+      - name: Mostrar todos los outputs
+        run: terraform output
