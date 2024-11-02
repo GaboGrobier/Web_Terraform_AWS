@@ -61,7 +61,7 @@ jobs:
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{secrets.USER_SERVER}}@${{ env.IP_PUBLICA }} << 'EOF'
           sudo apt-get install -y docker docker-compose
           cd /home/ubuntu/donjose/prueba3-practica
-          docker compose down
-          docker compose up -d --build
+          docker-compose down
+          docker-compose up -d --build
           EOF
 
