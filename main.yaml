@@ -3,7 +3,7 @@ name: EjercicioSeguridad_p3V3
 on: 
   push:
     branches:
-      - main 
+      - RamaNueva 
 
 jobs:
   deploy:

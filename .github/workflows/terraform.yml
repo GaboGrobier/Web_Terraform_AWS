@@ -1,0 +1,31 @@
+name: terraform
+
+on: 
+  push:
+    branches:
+      - main 
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: setup terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.9.8
+
+      - name: build a ec2 with terraform 
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+        run: |
+          cd infraestructura_tf
+          terraform init
+          terraform apply -auto-approve
+          INSTANCE_IP=$(terraform output -raw ip_publica )
+          echo "INSTANCE_IP=$INSTANCE_IP" >> $GITHUB_ENV
