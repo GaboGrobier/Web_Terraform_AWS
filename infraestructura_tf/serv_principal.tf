@@ -17,10 +17,7 @@ resource "aws_instance" "servidor_principal" {
                     #!/bin/bash
                     sudo apt update 
                     sudo apt upgrade 
-                    sudo apt-get install -y docker docker-compose
                     mkdir /home/ubuntu/donjose
-                    python -m venv /home/ubuntu/donjose
-
                     EOF
 }
 
