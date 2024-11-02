@@ -21,7 +21,7 @@ jobs:
 
       - name: Debug INSTANCE_IP
         run: |
-          echo "INSTANCE_IP=${{ env.INSTANCE_IP }}"
+          echo "IP_PUBLICA=${{ env.IP_PUBLICA }}"
 
       - name: Add SSH Key
         run: |
@@ -31,11 +31,11 @@ jobs:
 
       - name: Copy files to server
         run: |
-          rsync -avz --delete -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ./ ${{ secrets.USER_SERVER }}@${{ env.INSTANCE_IP }}:/home/ubuntu/donjose/
+          rsync -avz --delete -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ./prueba3-practica ${{ secrets.USER_SERVER }}@${{ env.IP_PUBLICA }}:/home/ubuntu/donjose/
 
       - name: SSH commands to deploy
         run: |
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{secrets.USER_SERVER}}@$INSTANCE_IP << 'EOF'
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{secrets.USER_SERVER}}@${{ env.IP_PUBLICA }} << 'EOF'
           cd /home/ubuntu/donjose/
           docker compose down
           docker compose up -d --build
