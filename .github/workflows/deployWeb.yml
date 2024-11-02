@@ -2,7 +2,7 @@ name: EC2
 
 on:
   workflow_run:
-    workflows: ["terraform"]
+    workflows: [""]
     types:
       - completed
 jobs:
