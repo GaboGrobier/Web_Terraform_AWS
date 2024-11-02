@@ -12,16 +12,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Debug IP_PUBLICA
+        run: | 
+          echo "La IP pública es: ${{ env.IP_PUBLICA }}"
       
       - name: Install Docker and Docker Compose
         run: |
           sudo apt-get update
           sudo apt-get install -y docker docker-compose
-
-
-      - name: Debug INSTANCE_IP
-        run: |
-          echo "IP_PUBLICA=${{ env.IP_PUBLICA }}"
 
       - name: Add SSH Key
         run: |

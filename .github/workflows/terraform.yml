@@ -36,3 +36,6 @@ jobs:
       
       - name: Guardar la ip 
         run:  echo "IP_PUBLICA=${{ steps.ip_publica.outputs.ip_publica }}" >> $GITHUB_ENV
+
+      - name: Imprimir IP
+        run: echo "La IP de la máquina es $IP_PUBLICA"
