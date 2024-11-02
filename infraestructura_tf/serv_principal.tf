@@ -17,7 +17,9 @@ resource "aws_instance" "servidor_principal" {
                     #!/bin/bash
                     sudo apt update 
                     sudo apt upgrade
-                    sudo apt-get install -y docker docker-compose 
+                    sudo apt-get install -y docker docker-compose
+                    sudo usermod -aG docker $USER
+                    sudo newgrp docker
                     mkdir /home/ubuntu/donjose
                     EOF
 }
