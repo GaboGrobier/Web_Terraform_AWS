@@ -28,9 +28,11 @@ jobs:
           terraform init
           terraform apply -auto-approve
 
-      - name: obtener ip maquina 
-        id: get_ip
-        run: |
-            PUBLIC_IP=$(terraform output -raw ip_publica )
-            echo "ese es la ip --> : ${INSTANCE_IP}" 
-            echo "PUBLIC_IP=${public_ip}" >> $GITHUB_ENV
+      - name: obtener ip
+        uses: dflook/terraform-output@v1
+        id: ip_publica
+        with:
+          path: infraestructura_tf
+      
+      - name: Print the hostname
+        run: echo "la ip de la maquina ${{ steps.ip_publica.outputs.ip_publica }}
