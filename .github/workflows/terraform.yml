@@ -39,3 +39,7 @@ jobs:
 
       - name: Imprimir IP
         run: echo "La IP de la máquina es $IP_PUBLICA"
+
+      - name: Listar variables de entorno
+        run: printenv
+
