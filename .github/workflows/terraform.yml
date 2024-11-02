@@ -56,10 +56,12 @@ jobs:
         run: |
           rsync -avz --delete -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ./prueba3-practica ${{ secrets.USER_SERVER }}@${{ env.IP_PUBLICA }}:/home/ubuntu/donjose/
 
+      - name: pausa para esperar termino de instalacion 
+        run: sleep 30
+
       - name: SSH commands to deploy
         run: |
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{secrets.USER_SERVER}}@${{ env.IP_PUBLICA }} << 'EOF'
-          sudo apt-get install -y docker docker-compose
           cd /home/ubuntu/donjose/prueba3-practica
           docker-compose down
           docker-compose up -d --build
