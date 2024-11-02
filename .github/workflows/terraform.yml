@@ -3,7 +3,7 @@ name: terraform
 on: 
   push:
     branches:
-      - main 
+      - CambialoAtuRama #cambialo a la rama que quierea que desate este flujo  
 
 jobs:
   deploy:
@@ -37,9 +37,6 @@ jobs:
       - name: Guardar la ip 
         run:  echo "IP_PUBLICA=${{ steps.ip_publica.outputs.ip_publica }}" >> $GITHUB_ENV
 
-      - name: Imprimir IP
-        run: echo "La IP de la máquina es $IP_PUBLICA"
-
 
       - name: Install Docker and Docker Compose
         run: |
@@ -56,7 +53,7 @@ jobs:
         run: |
           rsync -avz --delete -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ./prueba3-practica ${{ secrets.USER_SERVER }}@${{ env.IP_PUBLICA }}:/home/ubuntu/donjose/
 
-      - name: pausa para esperar termino de instalacion 
+      - name: pausa para esperar termino de instalacion Docker y docker-compose
         run: sleep 30
 
       - name: SSH commands to deploy
@@ -68,4 +65,6 @@ jobs:
           docker-compose down
           docker-compose up -d --build
           EOF
-
+      
+      - name: Imprimir IP
+        run: echo "La IP de la máquina es $IP_PUBLICA para acceder a la pagina "
