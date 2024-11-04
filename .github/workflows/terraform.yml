@@ -3,7 +3,7 @@ name: terraform
 on: 
   push:
     branches:
-      - CambialoAtuRama #cambialo a la rama que quierea que desate este flujo  
+      - main #cambialo a la rama que quierea que desate este flujo  
 
 jobs:
   deploy:
